@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "maps-choicer",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

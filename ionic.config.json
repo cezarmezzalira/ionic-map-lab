@@ -1,0 +1,7 @@
+{
+  "name": "maps-choicer",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
