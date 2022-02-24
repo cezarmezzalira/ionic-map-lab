@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild, } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { isPlatform, Platform } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+import { Geolocation as GeolocationCap } from '@capacitor/geolocation';
 
 
 @Component({
@@ -26,12 +27,13 @@ export class GoogleMapsComponent implements AfterViewInit {
   async ngAfterViewInit() {
     this.googleMaps = await this.getGoogleMaps(environment.googleMapsAPIKEY);
     const mapElem = this.mapElement.nativeElement;
-    this.setCurrentPosition(-26.228067, -52.671327);
+    // this.setCurrentPosition(-26.228067, -52.671327);
+    await this.getCurrentPosition();
     this.map = new this.googleMaps.Map(mapElem, {
       center: this.currentPosition,
       zoom: 15
     });
-    this.addMarker(this.currentLat, this.currentLng, 'You', 'Current Place');
+    this.addMarker(this.currentLat, this.currentLng, 'You', 'Current Place NOw!');
     this.googleMaps.event.addListenerOnce(this.map, 'idle', () => {
       mapElem.classList.add('show-map');
     });
@@ -56,11 +58,30 @@ export class GoogleMapsComponent implements AfterViewInit {
   }
 
   public async getCurrentPosition(): Promise<void> {
-    await this.geolocation.getCurrentPosition().then((resp) => {
-      this.setCurrentPosition(resp.coords.latitude, resp.coords.longitude);
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
+    const coordinates = {
+      latitude: 0,
+      longitude: 0
+    };
+    if (isPlatform('ios') || isPlatform('android')) {
+      await GeolocationCap.getCurrentPosition().then((resp) => {
+        coordinates.latitude = resp.coords.latitude;
+        coordinates.longitude = resp.coords.longitude;
+        console.log('using capacitor Geolocation');
+      }).catch((error) => {
+        console.log('Error getting location', error);
+      });
+
+    } else {
+      await this.geolocation.getCurrentPosition().then((resp) => {
+        coordinates.latitude = resp.coords.latitude;
+        coordinates.longitude = resp.coords.longitude;
+        console.log('using cordova Geolocation');
+
+      }).catch((error) => {
+        console.log('Error getting location', error);
+      });
+    }
+    this.setCurrentPosition(coordinates.latitude, coordinates.longitude);
   }
 
   public setCurrentPosition(lat: number, lng: number): void {
