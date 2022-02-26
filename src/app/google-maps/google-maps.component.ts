@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild, } from '@angular/core';
 import { isPlatform, Platform } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
-import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
-import { Geolocation as GeolocationCap } from '@capacitor/geolocation';
+import { Geolocation as GeolocationCordova } from '@awesome-cordova-plugins/geolocation/ngx';
+import { Geolocation as GeolocationCapacitor } from '@capacitor/geolocation';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class GoogleMapsComponent implements AfterViewInit {
 
   constructor(
     public platform: Platform,
-    private geolocation: Geolocation
+    private geolocation: GeolocationCordova
   ) { }
 
 
@@ -63,7 +63,7 @@ export class GoogleMapsComponent implements AfterViewInit {
       longitude: 0
     };
     if (isPlatform('ios') || isPlatform('android')) {
-      await GeolocationCap.getCurrentPosition().then((resp) => {
+      await GeolocationCapacitor.getCurrentPosition().then((resp) => {
         coordinates.latitude = resp.coords.latitude;
         coordinates.longitude = resp.coords.longitude;
         console.log('using capacitor Geolocation');
