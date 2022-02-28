@@ -9,11 +9,11 @@ const routes: Routes = [
   },
   {
     path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    loadChildren: () => import('./folder/folder.module').then(m => m.FolderPageModule)
   },
   {
     path: 'map',
-    loadChildren: () => import('./google-maps/map-router.module').then( m => m.MapRouterModule)
+    loadChildren: () => import('./components/map-component/map-router.module').then(m => m.MapRouterModule)
   }
 ];
 
@@ -23,4 +23,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

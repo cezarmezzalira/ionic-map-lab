@@ -70,7 +70,6 @@ export class GoogleMapsComponent implements AfterViewInit {
       }).catch((error) => {
         console.log('Error getting location', error);
       });
-
     } else {
       await this.geolocation.getCurrentPosition().then((resp) => {
         coordinates.latitude = resp.coords.latitude;
