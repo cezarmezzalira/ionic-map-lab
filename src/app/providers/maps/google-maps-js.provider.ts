@@ -1,6 +1,6 @@
-import { ElementRef, Injectable, ViewChild } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { Location } from './map-provider.service';
+import {ElementRef, Injectable} from '@angular/core';
+import {environment} from 'src/environments/environment';
+import {Location} from './map-provider.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import { Location } from './map-provider.service';
 export class GoogleMapsJSProvider {
   public map: any;
   private googleMaps;
-  constructor() { }
+  constructor() {}
 
   public async init(location: Location, mapElement: ElementRef) {
     this.googleMaps = await this.getGoogleMaps(environment.googleMapsAPIKEY);

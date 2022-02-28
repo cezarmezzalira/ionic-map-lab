@@ -19,5 +19,9 @@ export class MapComponent implements OnInit {
   async ngOnInit() {
     this.location = await this.geolocation.getCurrentPosition();
     await this.mapsProvider.init(this.location, this.mapElement);
+
+  }
+
+  async ionViewDidEnter() {
   }
 }

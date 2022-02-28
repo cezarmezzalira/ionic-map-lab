@@ -17,6 +17,7 @@ export class AppComponent {
     if (isPlatform('ios')) {
       CapacitorGoogleMaps.initialize({
         key: environment.googleMapsAPIKEY,
+        devicePixelRatio: window.devicePixelRatio,
       });
     }
   }
