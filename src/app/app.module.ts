@@ -10,7 +10,6 @@ import { MapRouterModule } from './components/map-component/map-router.module';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { MapProviderService } from './providers/maps/map-provider.service';
 import { GoogleMapsJSProvider } from './providers/maps/google-maps-js.provider';
-import { GoogleMapsNativeProvider } from './providers/maps/google-maps-native.provider';
 import { GeolocationProviderService } from './providers/geolocation/geolocation-provider.service';
 
 @NgModule({
@@ -20,7 +19,6 @@ import { GeolocationProviderService } from './providers/geolocation/geolocation-
   providers: [
     MapProviderService,
     GoogleMapsJSProvider,
-    GoogleMapsNativeProvider,
     Geolocation,
     GeolocationProviderService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

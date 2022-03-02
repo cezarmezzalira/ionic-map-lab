@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CapacitorGoogleMaps } from '@capacitor-community/capacitor-googlemaps-native';
 import { isPlatform } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 @Component({
@@ -13,12 +12,5 @@ export class AppComponent {
     { title: 'Map', url: '/map', icon: 'map' },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {
-    if (isPlatform('ios')) {
-      CapacitorGoogleMaps.initialize({
-        key: environment.googleMapsAPIKEY,
-        devicePixelRatio: window.devicePixelRatio,
-      });
-    }
-  }
+  constructor() { }
 }

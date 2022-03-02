@@ -1,7 +1,6 @@
 import { ElementRef, Injectable } from '@angular/core';
-import { isPlatform } from '@ionic/angular';
 import { GoogleMapsJSProvider } from './google-maps-js.provider';
-import { GoogleMapsNativeProvider } from './google-maps-native.provider';
+import { OpenStreetMapsProvider } from './open-street-maps.provider';
 
 export interface Location {
   latitude: number;
@@ -14,14 +13,13 @@ export interface Location {
 export class MapProviderService {
   public map: any;
 
-  constructor() {
-    if (isPlatform('ios') || isPlatform('android')) {
-      this.map = new GoogleMapsNativeProvider();
+  constructor(defaultMap = 'GOOGLE') {
+    if (defaultMap === 'OPENSTREET') {
+      this.map = new OpenStreetMapsProvider();
     } else {
-      console.log('Using Google Maps JS');
       this.map = new GoogleMapsJSProvider();
-
     }
+
   }
 
   init(location: Location, element: ElementRef) {
