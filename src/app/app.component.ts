@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { isPlatform } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -10,5 +12,5 @@ export class AppComponent {
     { title: 'Map', url: '/map', icon: 'map' },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+  constructor() { }
 }
